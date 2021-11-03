@@ -20,7 +20,7 @@ class Report:
         database = requests.get(url=self.url, headers=self.headers, params=self.params).json()
         return database['data']
 
-    def largest_volume(self): #La criptovaluta con il volume maggiore (in $) delle ultime 24 ore
+    def largest_volume(self): #Richiesta 1 - La criptovaluta con il volume maggiore (in $) delle ultime 24 ore
         resultsReport = Report()
         currencies = resultsReport.fetchCurrenciesData()
         currency_name = []
@@ -31,7 +31,7 @@ class Report:
                 currency_name = currency['name']
         return currency_name, currency_volume
 
-    def best_and_wrost_percent_change_24h(self): #Le migliori e le peggiori criptovalute (per incremento in percentuale delle ultime 24 ore)
+    def best_and_wrost_percent_change_24h(self): #Richiesta 2 - Le migliori e le peggiori criptovalute (per incremento in percentuale delle ultime 24 ore)
         resultsReport = Report()
         currencies = resultsReport.fetchCurrenciesData()
         currency_name = []
@@ -48,7 +48,7 @@ class Report:
         worst_10 = list(worst_dictionary[:10])
         return best_10, worst_10
 
-    def purchase_first_20(self):  #La quantità di denaro necessaria per acquistare una unità di ciascuna delle prime 20 criptovalute
+    def purchase_first_20(self):  #Richiesta 3 - La quantità di denaro necessaria per acquistare una unità di ciascuna delle prime 20 criptovalute
         resultsReport = Report()
         currencies = resultsReport.fetchCurrenciesData()
         market_cap = {}
@@ -68,7 +68,7 @@ class Report:
                     money_needed += currency['quote']['USD']['price']
         return market_cap, best_20_market_cap, money_needed
 
-    def purchase_bestCurrencies(self): #La quantità di denaro necessaria per acquistare una unità di tutte le criptovalute il cui volume delle ultime 24 ore sia superiore a 76.000.000$
+    def purchase_bestCurrencies(self): #Richiesta 4 - La quantità di denaro necessaria per acquistare una unità di tutte le criptovalute il cui volume delle ultime 24 ore sia superiore a 76.000.000$
         resultsReport = Report()
         currencies = resultsReport.fetchCurrenciesData()
         bestCurrencies_volume_24h = []
@@ -80,7 +80,7 @@ class Report:
                 money_needed_2 += currency['quote']['USD']['price']
         return bestCurrencies_volume_24h, volume_24h_start, money_needed_2
 
-    def gain_loss_percentage(self): #La percentuale di guadagno o perdita che avreste realizzato se aveste comprato una unità di ciascuna delle prime 20 criptovalute* il giorno prima (ipotizzando che la classifca non sia cambiata)
+    def gain_loss_percentage(self): #Richiesta 5 - La percentuale di guadagno o perdita che avreste realizzato se aveste comprato una unità di ciascuna delle prime 20 criptovalute il giorno prima (ipotizzando che la classifca non sia cambiata)
         resultsReport = Report()
         currencies = resultsReport.fetchCurrenciesData()
 
